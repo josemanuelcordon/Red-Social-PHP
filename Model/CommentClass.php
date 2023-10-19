@@ -65,7 +65,7 @@ class Comment
     {
         foreach ($this->answers as $answer) {
             if (empty(CommentRepository::getAnswers($answer->getId()))) {
-                echo '<article style="padding-left:' . ($nivel * 5) . ';" id="comment-answer">';
+                echo '<article style="margin-left:' . ($nivel * 10) . 'px;" id="comment-answer">';
                 echo '<p style="color:black;">' . $answer->getAuthor()->getUserName() . '</p>';
                 echo '<p>' . $answer->getComment() . '</p>';
                 echo '</article>';
@@ -76,6 +76,16 @@ class Comment
                 <input id="answer-submit" type="submit" value="send-comment"/>
                 </form>';
             } else {
+                echo '<article style="margin-left:' . ($nivel * 10) . 'px;" id="comment-answer">';
+                echo '<p style="color:black;">' . $answer->getAuthor()->getUserName() . '</p>';
+                echo '<p>' . $answer->getComment() . '</p>';
+                echo '</article>';
+                echo '<form id="answer-form" action="" method="post">
+                <textarea rows="3" name="comment" id="answer-send"></textarea>
+                <input type="hidden" name="id_comentario" value="' . $answer->getId() . '"/>
+                <input type="hidden" name="id_articulo" value="' . $idArticulo . '"/>
+                <input id="answer-submit" type="submit" value="send-comment"/>
+                </form>';
                 $answer->showAnswers($idArticulo, ++$nivel);
             }
         }
