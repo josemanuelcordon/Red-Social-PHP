@@ -38,4 +38,23 @@ class UserRepository
 
         return $users;
     }
+
+    public static function getAllUsers()
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM usuarios";
+        $result = $bd->query($q);
+        $users = [];
+        while ($datos = $result->fetch_assoc()) {
+            $users[] = new User($datos);
+        }
+        return $users;
+    }
+
+    public static function changeRol($id, $nuevoRol)
+    {
+        $bd = Conectar::conexion();
+        $q = "UPDATE usuarios SET rol=" . $nuevoRol . " WHERE id=" . $id;
+        $bd->query($q);
+    }
 }

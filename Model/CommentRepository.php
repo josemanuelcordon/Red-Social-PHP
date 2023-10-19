@@ -4,7 +4,8 @@ class CommentRepository
     public static function publishComment($comentario, $autor, $articulo, $respuesta = 0)
     {
         $bd = Conectar::conexion();
-        $q = "INSERT INTO comentarios VALUES (NULL, '" . $comentario . "','" . $autor . "', '" . $articulo . "')";
+        $fecha = date("Y-m-d H:i:s");
+        $q = "INSERT INTO comentarios VALUES (NULL, '" . $comentario . "','" . $autor . "', '" . $articulo . "', '" . $fecha . "')";
         $bd->query($q);
         $id_comment = $bd->insert_id;
         if ($respuesta) {
