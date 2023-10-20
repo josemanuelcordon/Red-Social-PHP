@@ -59,4 +59,16 @@ class ArticleRepository
         }
         return $articles;
     }
+
+    public static function searchArticles($text)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%'";
+        $result = $bd->query($q);
+        $articles = [];
+        while ($datos = $result->fetch_assoc()) {
+            $articles[] = new Article($datos);
+        }
+        return $articles;
+    }
 }

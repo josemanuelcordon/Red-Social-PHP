@@ -441,3 +441,9 @@ body {
   overflow-wrap: break-word;
   border-bottom: 1px solid #1d9bf0;
 }
+
+.article-searched-window {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

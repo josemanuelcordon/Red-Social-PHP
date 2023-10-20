@@ -27,6 +27,9 @@ if (!empty($_GET['controller'])) {
     if ($controlador == "comment") {
         require("Controller/commentController.php");
     }
+    if ($controlador == "search") {
+        require("Controller/searchController.php");
+    }
 }
 
 
