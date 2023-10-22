@@ -15,6 +15,7 @@ class User {
     }
         
     public function getUsername() {
+        //var_dump($_SESSION['user']); preguntar a nacho porque cargando el modelo antes que iniciando sesion deja mirar la variable session.
         return $this->username;
     }
     
@@ -26,5 +27,3 @@ class User {
         $this->rol=$rol;
     }
 }
-
-?>

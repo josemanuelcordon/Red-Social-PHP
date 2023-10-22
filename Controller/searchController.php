@@ -6,7 +6,6 @@ $articlesSearched = [];
 if (!empty($_POST['search-box'])) {
     $searchContent = $_POST['search-box'];
     $articlesSearched = ArticleRepository::searchArticles($searchContent);
-    var_dump($articlesSearched);
     include("View/searchView.phtml");
     die;
 }

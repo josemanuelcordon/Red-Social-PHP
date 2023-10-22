@@ -442,8 +442,21 @@ body {
   border-bottom: 1px solid #1d9bf0;
 }
 
+.search-window {
+  height: 100px;
+  display: grid;
+  place-content: center;
+}
+
 .article-searched-window {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
+}
+
+#search-box {
+  height: 64px;
+  width: 200px;
+  padding: 10px;
 }

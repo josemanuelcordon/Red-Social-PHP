@@ -71,4 +71,23 @@ class ArticleRepository
         }
         return $articles;
     }
+    public static function getLikes($idArticulo)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT COUNT(*) AS nLikes FROM likes WHERE id_articulo=" . $idArticulo;
+        $result = $bd->query($q);
+        return $result->fetch_assoc()['nLikes'];
+    }
+
+    public static function postLiked($idArticulo, $idUsuario)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM likes WHERE id_articulo=" . $idArticulo . " AND id_usuario=" . $idUsuario;
+        $result = $bd->query($q);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

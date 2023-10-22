@@ -9,6 +9,7 @@ if (!empty($_POST['comment'])) {
         CommentRepository::publishComment($comment, $author, $idArticulo);
     }
 }
+
 if (!empty($_GET['art'])) {
     $id_articulo = $_GET['art'];
     $_SESSION['articulo'] = ArticleRepository::getArticleById($id_articulo);
