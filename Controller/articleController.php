@@ -1,5 +1,5 @@
 <?php
-if (!empty($_POST['publicar_x'])) {
+if (!empty($_POST['titulo'])) {
     $titulo = $_POST['titulo'];
     $post = $_POST['post'];
     $idAutor = $_SESSION['user']->getId();

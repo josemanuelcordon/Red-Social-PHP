@@ -11,7 +11,6 @@ class ArticleRepository
         while ($datos = $result->fetch_assoc()) {
             $articles[] = new Article($datos);
         }
-
         return $articles;
     }
 
@@ -60,16 +59,24 @@ class ArticleRepository
         return $articles;
     }
 
-    public static function searchArticles($text)
+    public static function searchArticles($text, $index = 0, $limit = 2)
     {
         $bd = Conectar::conexion();
-        $q = "SELECT * FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%'";
+        $q = "SELECT * FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%' ORDER BY date DESC 
+        LIMIT " . $index . ", " . $limit;
         $result = $bd->query($q);
         $articles = [];
         while ($datos = $result->fetch_assoc()) {
             $articles[] = new Article($datos);
         }
         return $articles;
+    }
+    public static function linkNumber($text)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT COUNT(*) AS nLinks FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%' ORDER BY date DESC";
+        $result = $bd->query($q);
+        return $result->fetch_assoc()['nLinks'];
     }
     public static function getLikes($idArticulo)
     {

@@ -18,9 +18,11 @@
         </a>
     </header>
     <div class="search-window">
-        <form action="index.php?search=1&controller=search" method="POST">
-            <input type="text" name="search-box" id="search-box">
-            <input type="submit" value="Buscar" id="">
+        <form action="index.php?search=1&controller=search" method="GET">
+            <input type="text" name="search-box" id="search-box" />
+            <input type="hidden" name="controller" value="search" />
+            <input type="hidden" name="search" value="1" />
+            <input type="submit" value="Buscar" id="search-button" />
         </form>
     </div>
     <div class="article-searched-window">
@@ -42,6 +44,11 @@
                         </section>';
                 echo '</article>';
             }
+            echo '<nav class="pagination-bar">';
+            for ($i = 0; $i < $linkNumber; $i++) {
+                echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=' . $i . '">' . $i + 1 . '</a>';
+            }
+            echo '</nav>';
         }
 
         ?>

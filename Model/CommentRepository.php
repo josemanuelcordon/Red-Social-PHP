@@ -26,7 +26,7 @@ class CommentRepository
         return $comments;
     }
 
-    public static function getAnswers($id)
+    public static function getAnswers($id) //Hacer un array de duplas (nivel_indexacion, comentario)
     {
         $bd = Conectar::conexion();
         $q = "SELECT * FROM comentarios WHERE id IN (SELECT id_respuesta FROM respuestas WHERE id_comentario=" . $id . ")";
@@ -35,7 +35,6 @@ class CommentRepository
         while ($datos = $result->fetch_assoc()) {
             $answers[] = new Comment($datos);
         }
-
         return $answers;
     }
 }

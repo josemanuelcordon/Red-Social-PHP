@@ -11,11 +11,6 @@ require_once("Model/likeRepository.php");
 session_start();
 //Usar modelos
 require_once("Controller/likeController.php");
-$articles = ArticleRepository::getArticles();
-$friends = [];
-$comments = [];
-$answers = [];
-
 
 if (!empty($_GET['controller'])) {
     $controlador = $_GET['controller'];
@@ -32,18 +27,10 @@ if (!empty($_GET['controller'])) {
         require("Controller/searchController.php");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
+$articles = ArticleRepository::getArticles();
+$friends = [];
+$comments = [];
+$answers = [];
 
 //Cargar Vistas
 include("View/mainView.phtml");
