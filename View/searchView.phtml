@@ -19,6 +19,16 @@
     </header>
     <div class="search-window">
         <form action="index.php?search=1&controller=search" method="GET">
+            <select name="filtro" id="orden">
+                <option value="autor">Autor</option>
+                <option value="date">Fecha</option>
+                <option value="title">Título</option>
+                <option value="text">Artículo</option>
+            </select>
+            <select name="orden" id="orden">
+                <option value="ASC">Ascendente</option>
+                <option value="DESC">Descendente</option>
+            </select>
             <input type="text" name="search-box" id="search-box" />
             <input type="hidden" name="controller" value="search" />
             <input type="hidden" name="search" value="1" />
@@ -48,14 +58,14 @@
             if ($linkNumber > 1) {
                 echo '<nav class="pagination-bar">';
                 if ($_GET['index'] > 1) {
-                    echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=0">Primera</a>';
+                    echo '<a href="index.php?search=1&controller=search&filtro=' . $_GET['filtro'] . '&orden=' . $_GET['orden'] . '&search-box=' . $_GET['search-box'] . '&index=0">Primera</a>';
                 }
                 for ($i = $_GET['index'] - 1; $i <= $_GET['index'] + 1; $i++) {
                     if ($i > -1 && $i < $linkNumber)
-                        echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=' . $i . '">' . $i + 1 . '</a>';
+                        echo '<a href="index.php?search=1&controller=search&filtro=' . $_GET['filtro'] . '&orden=' . $_GET['orden'] . '&search-box=' . $_GET['search-box'] . '&index=' . $i . '">' . $i + 1 . '</a>';
                 }
                 if ($_GET['index'] < $linkNumber - 2) {
-                    echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=' . $linkNumber - 1 . '">Última</a>';
+                    echo '<a href="index.php?search=1&controller=search&filtro=' . $_GET['filtro'] . '&orden=' . $_GET['orden'] . '&search-box=' . $_GET['search-box'] . '&index=' . $linkNumber - 1 . '">Última</a>';
                 }
                 echo '</nav>';
             }

@@ -59,10 +59,10 @@ class ArticleRepository
         return $articles;
     }
 
-    public static function searchArticles($text, $index = 0, $limit = 5)
+    public static function searchArticles($text, $index = 0, $limit = 5, $filtro, $orden)
     {
         $bd = Conectar::conexion();
-        $q = "SELECT * FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%' ORDER BY date DESC 
+        $q = "SELECT * FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%' ORDER BY " . $filtro . " " . $orden . "
         LIMIT " . $index . ", " . $limit;
         $result = $bd->query($q);
         $articles = [];
