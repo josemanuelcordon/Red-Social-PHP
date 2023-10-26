@@ -59,7 +59,7 @@ class ArticleRepository
         return $articles;
     }
 
-    public static function searchArticles($text, $index = 0, $limit = 2)
+    public static function searchArticles($text, $index = 0, $limit = 5)
     {
         $bd = Conectar::conexion();
         $q = "SELECT * FROM articulos WHERE title LIKE '%" . $text . "%' OR text LIKE '%" . $text . "%' ORDER BY date DESC 
@@ -95,6 +95,20 @@ class ArticleRepository
             return true;
         } else {
             return false;
+        }
+    }
+
+    public static function likePost($idArticulo, $idUsuario)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM likes WHERE id_articulo=" . $idArticulo . " AND id_usuario=" . $idUsuario;
+        $result = $bd->query($q);
+        if ($result->num_rows == 0) {
+            $q = "INSERT INTO likes VALUES (" . $idArticulo . "," . $idUsuario . ")";
+            $bd->query($q);
+        } else {
+            $q = "DELETE FROM likes WHERE id_articulo=" . $idArticulo . " AND id_usuario=" . $idUsuario;
+            $bd->query($q);
         }
     }
 }

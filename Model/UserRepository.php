@@ -57,4 +57,18 @@ class UserRepository
         $q = "UPDATE usuarios SET rol=" . $nuevoRol . " WHERE id=" . $id;
         $bd->query($q);
     }
+
+    public static function registerUser($username, $password)
+    {
+        $bd = Conectar::conexion();
+        $q = "SELECT * FROM usuarios WHERE username ='" . $username . "'";
+        $result = $bd->query($q);
+        if ($result->num_rows == 0) {
+            $q = "INSERT INTO usuarios VALUES (NULL, '" . $username . "', '" . $password . "', 1)";
+            $bd->query($q);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

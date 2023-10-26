@@ -345,8 +345,9 @@ body {
 
 #single-comment-window {
   width: 80%;
-  height: 72vh;
+  height: 92vh;
   overflow: scroll;
+  overflow-x: hidden;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -453,6 +454,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 20px;
 }
 
 #search-box {
@@ -478,8 +480,7 @@ body {
 .pagination-bar a {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  padding: 8px;
   text-align: center;
   text-decoration: none;
   color: #ffff;

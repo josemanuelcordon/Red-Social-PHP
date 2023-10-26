@@ -10,7 +10,10 @@ require_once("Model/likeRepository.php");
 
 session_start();
 //Usar modelos
-require_once("Controller/likeController.php");
+$friends = [];
+$comments = [];
+$answers = [];
+$articles = ArticleRepository::getArticles();
 
 if (!empty($_GET['controller'])) {
     $controlador = $_GET['controller'];
@@ -27,10 +30,12 @@ if (!empty($_GET['controller'])) {
         require("Controller/searchController.php");
     }
 }
-$articles = ArticleRepository::getArticles();
-$friends = [];
-$comments = [];
-$answers = [];
 
 //Cargar Vistas
-include("View/mainView.phtml");
+if (!isset($_SESSION['user'])) {
+    include("View/loginView.phtml");
+    die;
+} else {
+    $rolUsuario = $_SESSION["user"]->getRol();
+    include("View/mainView.phtml");
+}

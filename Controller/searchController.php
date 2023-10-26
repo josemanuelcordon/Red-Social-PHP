@@ -5,9 +5,9 @@ $articlesSearched = [];
 
 if (!empty($_GET['search-box'])) {
     $searchContent = $_GET['search-box'];
-    $linkNumber = ArticleRepository::linkNumber($searchContent) / 2;
+    $linkNumber = ceil(ArticleRepository::linkNumber($searchContent) / 5);
     if (isset($_GET['index'])) {
-        $articlesSearched = ArticleRepository::searchArticles($searchContent, $_GET['index'] * 2);
+        $articlesSearched = ArticleRepository::searchArticles($searchContent, $_GET['index'] * 5);
     } else {
         $articlesSearched = ArticleRepository::searchArticles($searchContent);
     }

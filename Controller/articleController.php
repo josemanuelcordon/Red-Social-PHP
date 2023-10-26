@@ -15,3 +15,9 @@ if (!empty($_GET['fp'])) {
     $id = $_SESSION['user']->getId();
     $articles = ArticleRepository::getMyFriendArticles($id);
 }
+
+if (!empty($_GET['like'])) {
+    $idUser = $_SESSION['user']->getId();
+    ArticleRepository::likePost($_GET['like'], $idUser);
+    header('location: index.php');
+}

@@ -22,6 +22,7 @@
             <input type="text" name="search-box" id="search-box" />
             <input type="hidden" name="controller" value="search" />
             <input type="hidden" name="search" value="1" />
+            <input type="hidden" name="index" value="0" />
             <input type="submit" value="Buscar" id="search-button" />
         </form>
     </div>
@@ -44,16 +45,32 @@
                         </section>';
                 echo '</article>';
             }
-            echo '<nav class="pagination-bar">';
-            for ($i = 0; $i < $linkNumber; $i++) {
-                echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=' . $i . '">' . $i + 1 . '</a>';
+            if ($linkNumber > 1) {
+                echo '<nav class="pagination-bar">';
+                if ($_GET['index'] > 1) {
+                    echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=0">Primera</a>';
+                }
+                for ($i = $_GET['index'] - 1; $i <= $_GET['index'] + 1; $i++) {
+                    if ($i > -1 && $i < $linkNumber)
+                        echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=' . $i . '">' . $i + 1 . '</a>';
+                }
+                if ($_GET['index'] < $linkNumber - 2) {
+                    echo '<a href="index.php?search=1&controller=search&search-box=' . $_GET['search-box'] . '&index=' . $linkNumber - 1 . '">Última</a>';
+                }
+                echo '</nav>';
             }
-            echo '</nav>';
         }
 
         ?>
     </div>
-
+    <script>
+        const searchForm = document.getElementById('search-box');
+        searchForm.value = <?php
+                            if (!empty($_GET['search-box'])) {
+                                echo '"' . $_GET['search-box'] . '"';
+                            }
+                            ?>
+    </script>
 </body>
 
 </html>

@@ -26,9 +26,9 @@
                 <h3>' . $user->getUserName() . '</h3>';
             echo '<form method="POST" action="index.php?admin=1&controller=user&user=' . $user->getId() . '">
                 <select name="rol">';
-            echo '<option value="admin" ' . ($user->getRol() == 2 ? ' selected' : '') . '>Admin</option>';
-            echo '<option value="default"' . ($user->getRol() == 1 ? ' selected' : '') . '>Default</option>';
-            echo '<option value="baneado"' . ($user->getRol() == 0 ? ' selected' : '') . '>Baneado</option>';
+            echo '<option value="2" ' . ($user->getRol() == 2 ? ' selected' : '') . '>Admin</option>';
+            echo '<option value="1"' . ($user->getRol() == 1 ? ' selected' : '') . '>Default</option>';
+            echo '<option value="0"' . ($user->getRol() == 0 ? ' selected' : '') . '>Baneado</option>';
             echo '</select>
             <input type="submit" name="changeRol" value="Cambiar Rol"> 
                 </form>';
