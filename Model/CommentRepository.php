@@ -17,16 +17,22 @@ class CommentRepository
     public static function getComments($id)
     {
         $bd = Conectar::conexion();
-        $q = "SELECT * FROM comentarios WHERE articulo=" . $id . " AND id NOT IN (SELECT id_respuesta FROM respuestas)";
+        $q = "SELECT * FROM comentarios WHERE articulo=" . $id;
         $comments = [];
         $result = $bd->query($q);
+        $nivel = 1;
         while ($datos = $result->fetch_assoc()) {
-            $comments[] = new Comment($datos);
+            $comments[] = [new Comment($datos), $nivel];
+            if (CommentRepository::getAnswers($datos['id'])) {
+                $nivel++;
+            } else {
+                $nivel = 1;
+            }
         }
         return $comments;
     }
 
-    public static function getAnswers($id) //Hacer un array de duplas (nivel_indexacion, comentario)
+    public static function getAnswers($id)
     {
         $bd = Conectar::conexion();
         $q = "SELECT * FROM comentarios WHERE id IN (SELECT id_respuesta FROM respuestas WHERE id_comentario=" . $id . ")";

@@ -14,9 +14,6 @@ if (!empty($_GET['art'])) {
     $id_articulo = $_GET['art'];
     $comments = CommentRepository::getComments($id_articulo);
     $article = ArticleRepository::getArticleById($id_articulo);
-    foreach ($comments as $comment) {
-        $answers[$comment->getId()] = CommentRepository::getAnswers($comment->getId());
-    }
     include("View/commentView.phtml");
     die;
 }

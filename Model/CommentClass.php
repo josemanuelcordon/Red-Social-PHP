@@ -72,24 +72,4 @@ class Comment
     {
         $this->fecha = $fecha;
     }
-
-    public function showAnswers($idArticulo, $nivel = 1)
-    {
-        foreach ($this->answers as $answer) {
-            echo '<article style="margin-left:' . ($nivel * 20) . 'px;" id="comment-answer">';
-            echo '<p style="color:black;">' . $answer->getAuthor()->getUserName() . ' --- Respuesta a: ' . $this->getAuthor()->getUserName() . '</p>';
-            echo '<p>' . $answer->getComment() . '</p>';
-            echo '<p>' . $answer->getFecha() . '</p>';
-            echo '</article>';
-            echo '<form style="margin-left:' . ($nivel * 20) . 'px;" id="answer-form" action="" method="post">
-                <textarea rows="3" name="comment" id="answer-send"></textarea>
-                <input type="hidden" name="id_comentario" value="' . $answer->getId() . '"/>
-                <input type="hidden" name="id_articulo" value="' . $idArticulo . '"/>
-                <input id="answer-submit" type="submit" value="send-comment"/>
-                </form>';
-            if (!empty(CommentRepository::getAnswers($answer->getId()))) {
-                $answer->showAnswers($idArticulo, ++$nivel);
-            }
-        }
-    }
 }

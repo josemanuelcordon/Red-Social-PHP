@@ -66,18 +66,17 @@
                 <input id="comment-submit" type="submit" value="send-comment"/>
                 </form>';
     foreach ($comments as $comment) {
-        echo '<article id="comment-answer">';
-        echo '<p style="color:black;">' . $comment->getAuthor()->getUserName() . '</p>';
-        echo '<p>' . $comment->getComment() . '</p>';
-        echo '<p>' . $comment->getFecha() . '</p>';
+        echo '<article style="margin-left:' . ($comment[1] - 1) * 25 . 'px;"id="comment-answer">';
+        echo '<p style="color:black;">' . $comment[0]->getAuthor()->getUserName() . '</p>';
+        echo '<p>' . $comment[0]->getComment() . '</p>';
+        echo '<p>' . $comment[0]->getFecha() . '</p>';
         echo '</article>';
         echo '<form id="answer-form" action="" method="post">
                     <textarea rows="3" name="comment" id="answer-send"></textarea>
-                    <input type="hidden" name="id_comentario" value="' . $comment->getId() . '"/>
+                    <input type="hidden" name="id_comentario" value="' . $comment[0]->getId() . '"/>
                     <input type="hidden" name="id_articulo" value="' . $article->getId() . '"/>
                     <input id="answer-submit" type="submit" value="send-comment"/>
                     </form>';
-        $comment->showAnswers($article->getId());
     }
     echo '</section>';
     ?>
